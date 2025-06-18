@@ -24,6 +24,9 @@ height: 100vw;
 }
 
 #screen {
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
     border: 1px solid;
     border-color: black;
     height: 50px;
