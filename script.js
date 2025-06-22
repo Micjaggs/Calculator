@@ -1,5 +1,5 @@
 // Trying to figure out why the equals button isn't pushing the result to the screen
-
+// when you press the operator last, then equals, it prints...
 
 // Link HTML elements to JS
 const screenDisplay = document.querySelector("#screen")
@@ -8,7 +8,9 @@ const secondaryNumber = document.querySelector("#previous-number")
 const clearBtn = document.querySelector(".clear")
 const numberBtn = document.querySelectorAll(".number")
 const operator = document.querySelectorAll(".operator")
-const equalBtn = document.querySelectorAll(".equal")
+const equalBtn = document.querySelector(".equal")
+
+console.log(equalBtn)
 
 // Initialize values
 let currentNumber = ""
@@ -66,10 +68,11 @@ function handleNumber(num) {
         shouldResetScreen = false
     }
     if (num == "." && currentNumber.includes(".")) return;
-    if (currentNumber === 0 && num != ".") {
+    if (currentNumber === 0 && num !== ".") {
         currentNumber = num
-    } else if (currentNumber.length <= 9)
+    } else if (currentNumber.length <= 9) {
         return currentNumber += num
+    }
 }
 
 // Function for operator selection
@@ -83,27 +86,35 @@ function handleOperator(op) {
 }
 
 // Function to do the math
-function calculate(currentNumber, previousNumber) {
+function calculate() {
     if (previousNumber === "" || currentNumber === "") return;
     let currentNumberFLoat = parseFloat(currentNumber)
     let previousNumberFloat = parseFloat(previousNumber)
-    let result
+    let result1
 
     switch(operatorSelected) {
         case "+":
-            result = add(currentNumberFLoat, previousNumberFloat)
+            result1 = add(currentNumberFLoat, previousNumberFloat)
             break;
         case "-":
-            result = subtract(currentNumberFLoat, previousNumberFloat)
-        case "*":
-            result = multiply(currentNumberFLoat, previousNumberFloat)
+            result1 = subtract(currentNumberFLoat, previousNumberFloat)
+            break;
+        case "x":
+            result1 = multiply(currentNumberFLoat, previousNumberFloat)
+            break;
         case "/":
-            result = divide(currentNumberFLoat, previousNumberFloat)
-
+            result1 = divide(currentNumberFLoat, previousNumberFloat)
+            break;
     }
-    currentNumber = result
+  
+    currentNumber = result1
+    operatorSelected = null
+    previousNumber = ""
+    shouldResetScreen = true
     updateDisplay()
 }
+
+
 //   // Make sure we have everything we need
 //   IF previousNumber is empty OR currentNumber is empty, THEN
 //     STOP
@@ -138,19 +149,24 @@ function calculate(currentNumber, previousNumber) {
 // Functions for maths
 
 function add(currentNumber, previousNumber) {
-    return currentNumber + previousNumber
+    let result = parseFloat(currentNumber) + parseFloat(previousNumber)
+    return result
 }
 
 function subtract(currentNumber, previousNumber) {
-    return currentNumber - previousNumber
+    let result =  parseFloat(currentNumber) - parseFloat(previousNumber)
+    return result
 }
 
 function multiply(currentNumber, previousNumber) {
-    return currentNumber * previousNumber
+    let result = parseFloat(currentNumber) * parseFloat(previousNumber)
+    return result
 }
 
 function divide(currentNumber, previousNumber) {
-    return currentNumber / previousNumber
+    let result = parseFloat(currentNumber) / parseFloat(previousNumber)
+    return result
 }
+
 
  
