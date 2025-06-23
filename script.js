@@ -1,5 +1,5 @@
-// Trying to figure out why the equals button isn't pushing the result to the screen
-// when you press the operator last, then equals, it prints...
+// need to write logic that make the operator act as the calculator button
+//if it's selected after a num an op and a num are selected
 
 // Link HTML elements to JS
 const screenDisplay = document.querySelector("#screen")
@@ -9,8 +9,6 @@ const clearBtn = document.querySelector(".clear")
 const numberBtn = document.querySelectorAll(".number")
 const operator = document.querySelectorAll(".operator")
 const equalBtn = document.querySelector(".equal")
-
-console.log(equalBtn)
 
 // Initialize values
 let currentNumber = ""
@@ -31,7 +29,7 @@ numberBtn.forEach(button => {
     })
 })
 
-// //FIX ---> Create function to move current number to previous number when operator is selected
+//function to move current number to previous number when operator is selected
 
 operator.forEach(button => {
     button.addEventListener('click', event => {
@@ -40,9 +38,11 @@ operator.forEach(button => {
 })
 
 //Event listener to trigger calculate
+
 equalBtn.addEventListener('click', calculate)
 
 //Function to clear display
+
 function clearScreen() {
     currentNumber = ""
     previousNumber = ""
@@ -81,91 +81,55 @@ function handleOperator(op) {
     if (currentNumber === "") return; 
     operatorSelected = op
     previousNumber = currentNumber
-    updateDisplay()
     currentNumber = ""
+    updateDisplay()
 }
 
-// Function to do the math
+// Function to calculate
 function calculate() {
     if (previousNumber === "" || currentNumber === "") return;
     let currentNumberFLoat = parseFloat(currentNumber)
     let previousNumberFloat = parseFloat(previousNumber)
-    let result1
+    let computation
 
     switch(operatorSelected) {
         case "+":
-            result1 = add(currentNumberFLoat, previousNumberFloat)
+            computation = add(currentNumberFLoat, previousNumberFloat)
             break;
         case "-":
-            result1 = subtract(currentNumberFLoat, previousNumberFloat)
+            computation = subtract(currentNumberFLoat, previousNumberFloat)
             break;
         case "x":
-            result1 = multiply(currentNumberFLoat, previousNumberFloat)
+            computation = multiply(currentNumberFLoat, previousNumberFloat)
             break;
         case "/":
-            result1 = divide(currentNumberFLoat, previousNumberFloat)
+            computation = divide(previousNumberFloat, currentNumberFLoat)
             break;
     }
   
-    currentNumber = result1
+    currentNumber = computation.toString()
     operatorSelected = null
     previousNumber = ""
     shouldResetScreen = true
     updateDisplay()
 }
 
-
-//   // Make sure we have everything we need
-//   IF previousNumber is empty OR currentNumber is empty, THEN
-//     STOP
-//   END IF
-
-//   // Convert number strings to actual numbers
-//   DEFINE number1 = convert previousNumber to a number
-//   DEFINE number2 = convert currentNumber to a number
-//   DEFINE theResult
-
-//   // Figure out which math to do
-//   SWITCH operatorSelected:
-//     CASE '+': SET theResult = number1 + number2
-//     CASE '-': SET theResult = number1 - number2
-//     CASE 'x': SET theResult = number1 * number2
-//     CASE '÷':
-//       IF number2 is 0, THEN
-//         SHOW ERROR "Cannot divide by zero"
-//         CALL clearScreen()
-//         STOP
-//       ELSE
-//         SET theResult = number1 / number2
-//       END IF
-//   END SWITCH
-
-//   // Update the state with the result
-//   SET currentNumber = theResult
-//   SET operatorSelected = null
-//   SET previousNumber = "" // Clear the holding spot
-// END FUNCTION
-
-// Functions for maths
+//Maths functions
 
 function add(currentNumber, previousNumber) {
-    let result = parseFloat(currentNumber) + parseFloat(previousNumber)
-    return result
+    return parseFloat(currentNumber) + parseFloat(previousNumber)
 }
 
 function subtract(currentNumber, previousNumber) {
-    let result =  parseFloat(currentNumber) - parseFloat(previousNumber)
-    return result
+    return  parseFloat(currentNumber) - parseFloat(previousNumber) 
 }
 
 function multiply(currentNumber, previousNumber) {
-    let result = parseFloat(currentNumber) * parseFloat(previousNumber)
-    return result
+    return parseFloat(currentNumber) * parseFloat(previousNumber)
 }
 
-function divide(currentNumber, previousNumber) {
-    let result = parseFloat(currentNumber) / parseFloat(previousNumber)
-    return result
+function divide(previousNumber, currentNumber) {
+    return parseFloat(previousNumber) / parseFloat(currentNumber)
 }
 
 
