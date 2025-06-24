@@ -75,12 +75,31 @@ function handleNumber(num) {
     }
 }
 
+// Function for handling interim chained calculations
+
+function compute(a, op, b) {
+    let curr = parseFloat(a);
+    let prev = parseFloat(b); 
+    switch (op) {
+        case "+": return curr + prev
+        case "-": return prev - curr
+        case "x": return prev * curr
+        case "/": return prev / curr
+        default: curr
+    }
+}
+
+
 // Function for operator selection
 
 function handleOperator(op) {
     if (currentNumber === "") return; 
+    if (currentNumber !== "" && previousNumber !== "") {
+        let interim = compute(currentNumber, operatorSelected, previousNumber)
+        previousNumber = interim.toString()
+        updateDisplay()
+    } else previousNumber = currentNumber;
     operatorSelected = op
-    previousNumber = currentNumber
     currentNumber = ""
     updateDisplay()
 }
@@ -88,22 +107,20 @@ function handleOperator(op) {
 // Function to calculate
 function calculate() {
     if (previousNumber === "" || currentNumber === "") return;
-    let currentNumberFLoat = parseFloat(currentNumber)
-    let previousNumberFloat = parseFloat(previousNumber)
     let computation
 
     switch(operatorSelected) {
         case "+":
-            computation = add(currentNumberFLoat, previousNumberFloat)
+            computation = add(currentNumber, previousNumber)
             break;
         case "-":
-            computation = subtract(currentNumberFLoat, previousNumberFloat)
+            computation = subtract(currentNumber, previousNumber)
             break;
         case "x":
-            computation = multiply(currentNumberFLoat, previousNumberFloat)
+            computation = multiply(currentNumber, previousNumber)
             break;
         case "/":
-            computation = divide(previousNumberFloat, currentNumberFLoat)
+            computation = divide(previousNumber, currentNumber)
             break;
     }
   
@@ -116,20 +133,20 @@ function calculate() {
 
 //Maths functions
 
-function add(currentNumber, previousNumber) {
-    return parseFloat(currentNumber) + parseFloat(previousNumber)
+function add(a, b) {
+    return parseFloat(a) + parseFloat(b)
 }
 
-function subtract(currentNumber, previousNumber) {
-    return  parseFloat(currentNumber) - parseFloat(previousNumber) 
+function subtract(a, b) {
+    return  parseFloat(a) - parseFloat(b) 
 }
 
-function multiply(currentNumber, previousNumber) {
-    return parseFloat(currentNumber) * parseFloat(previousNumber)
+function multiply(a, b) {
+    return parseFloat(a) * parseFloat(b)
 }
 
-function divide(previousNumber, currentNumber) {
-    return parseFloat(previousNumber) / parseFloat(currentNumber)
+function divide(b, a) {
+    return parseFloat(b) / parseFloat(a)
 }
 
 
