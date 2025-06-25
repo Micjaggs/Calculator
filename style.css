@@ -15,6 +15,10 @@ height: 100vw;
     font-size: 31px;
 }
 
+.btn:hover {
+    background-color: burlywood
+}
+
 
 #first-row {
     display: flex;
@@ -26,10 +30,18 @@ height: 100vw;
 #screen {
     display: flex;
     flex-direction: column;
-    justify-content: end;
+    justify-content: flex-end;
+    text-align: right;
     border: 1px solid;
     border-color: black;
     height: 50px;
     width: 225px;
     margin: 12px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
 }
+
+h1 {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
