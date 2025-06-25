@@ -1,6 +1,3 @@
-// need to write logic that make the operator act as the calculator button
-//if it's selected after a num an op and a num are selected
-
 // Link HTML elements to JS
 const screenDisplay = document.querySelector("#screen")
 const mainNumber = document.querySelector("#current-number")
@@ -18,6 +15,7 @@ let shouldResetScreen = false
 let result = ""
 
 // Button to clear screen
+
 clearBtn.addEventListener('click', clearScreen)
 
 // Create function to print user selections to calculator screen
@@ -60,7 +58,7 @@ function updateDisplay() {
     } else secondaryNumber.textContent = ""
 }
 
-// Create a function to handle the selected number
+// Function to handle the selected number
 
 function handleNumber(num) {
     if (shouldResetScreen) {
