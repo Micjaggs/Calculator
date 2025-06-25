@@ -12,7 +12,7 @@ A no-frills JavaScript calculator that does what you expect—nothing more, noth
 ## Setup
 1. Clone or download this repo.  
 2. Open `index.html` in your browser.  
-
+3. Just visit the page https://micjaggs.github.io/Calculator/
 _No build tools, no extra steps—just click and calculate._
 
 ## Usage
