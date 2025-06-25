@@ -106,6 +106,8 @@ function handleOperator(op) {
 function calculate() {
     if (previousNumber === "" || currentNumber === "") return;
     let computation
+    
+try {
 
     switch(operatorSelected) {
         case "+":
@@ -121,8 +123,13 @@ function calculate() {
             computation = divide(previousNumber, currentNumber)
             break;
     }
-  
     currentNumber = computation.toString()
+
+} catch(e) {
+
+    currentNumber = e.message
+}
+
     operatorSelected = null
     previousNumber = ""
     shouldResetScreen = true
@@ -144,7 +151,11 @@ function multiply(a, b) {
 }
 
 function divide(b, a) {
-    return parseFloat(b) / parseFloat(a)
+    const divisor = parseFloat(a)
+    if (divisor === 0) {
+        throw new Error ("Cannot divide by zero you squeeb!")
+    }
+    return parseFloat(b) / divisor
 }
 
 
